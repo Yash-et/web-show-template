@@ -1,29 +1,529 @@
-body{
-    background-color: red;
-}    
-.heading{
-    color: white
-    font-size: 6rem;
-    font family= "Ephesis", cursive;
-    margin-left: 25rem;
+/* ==============================
+   GLOBAL STYLES
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
-.pics{
-    width: 100%
-    height: auto;
+
+:root {
+    --background: #11100e;
+    --surface: #1b1916;
+    --gold: #c5a46d;
+    --gold-light: #e0c28b;
+    --text: #f5f0e8;
+    --muted: #aaa39a;
 }
-#image1{
-    background-image: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.guim.co.uk%2Fimg%2Fmedia%2Fb4671b518cf9f81e4343c5921a6210141fd9f8fa%2F0_92_4284_2570%2Fmaster%2F4284.jpg%3Fwidth%3D1200%26height%3D1200%26quality%3D85%26auto%3Dformat%26fit%3Dcrop%26s%3D75205a6a967abc32d73fc80b7b23b52a&imgrefurl=https%3A%2F%2Fwww.theguardian.com%2Ftv-and-radio%2F2021%2Fmay%2F02%2Fpeaky-blinders-investigated-allegedly-breaking-covid-protocols&tbnid=9x_US4hthdMv6M&vet=12ahUKEwiG8tv-zqjzAhXPCCsKHTIpAuEQMygBegUIARDLAQ..i&docid=yr1DUKLtuhmQGM&w=1200&h=1200&q=peaky%20blinders&ved=2ahUKEwiG8tv-zqjzAhXPCCsKHTIpAuEQMygBegUIARDLAQ");
-    width: 300px ;
-    height: 300px;
-    float: right;
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.section-padding {
+    padding: 100px 9%;
+}
+
+/* ==============================
+   NAVIGATION
+================================ */
+
+.navbar {
+    width: 100%;
+    height: 75px;
+    padding: 0 9%;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(12, 11, 10, 0.65);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.logo span,
+footer h2 span {
+    color: var(--gold);
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: var(--muted);
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+/* ==============================
+   HERO SECTION
+================================ */
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=85&w=2000")
+        center/cover no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10, 9, 8, 0.96),
+            rgba(10, 9, 8, 0.65),
+            rgba(10, 9, 8, 0.35)
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 82%;
+    max-width: 1100px;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(4rem, 11vw, 9rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 5px;
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.gold-line {
+    width: 90px;
+    height: 3px;
+    background: var(--gold);
+    margin: 30px 0;
+}
+
+.hero-subtitle {
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+}
+
+.hero-description {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    color: #d0c8bd;
+}
+
+.hero-button {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 15px 32px;
+
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+
+    transition: 0.35s;
+}
+
+.hero-button:hover {
+    background: var(--gold);
+    color: #111;
+    transform: translateY(-4px);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: var(--muted);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+}
+
+.scroll-indicator span {
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+/* ==============================
+   SECTION HEADINGS
+================================ */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-heading p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.section-heading h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+}
+
+.section-heading h2 span {
+    color: var(--gold);
+}
+
+/* ==============================
+   GALLERY
+================================ */
+
+.pics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.gallery-card {
+    height: 360px;
+    position: relative;
+    overflow: hidden;
+
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    align-items: flex-end;
+
+    transition: 0.4s;
+}
+
+.gallery-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        transparent 40%,
+        rgba(0, 0, 0, 0.85)
+    );
+}
+
+.gallery-card:hover {
+    transform: translateY(-10px);
+}
+
+.gallery-card span {
+    position: relative;
+    z-index: 1;
+
+    padding: 25px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    font-size: 1rem;
+}
+
+.gallery-one {
+    background-image: url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=85&w=700");
+}
+
+.gallery-two {
+    background-image: url("https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?q=85&w=700");
+}
+
+.gallery-three {
+    background-image: url("https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=85&w=700");
+}
+
+.gallery-four {
+    background-image: url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=85&w=700");
+}
+
+/* ==============================
+   ABOUT SECTION
+================================ */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+
+    background: var(--surface);
+}
+
+.about-image {
+    min-height: 550px;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.4)
+        ),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=85&w=1000")
+        center/cover;
+}
+
+.about-content h2 {
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    line-height: 1.1;
+}
+
+.about-content h2 span {
+    color: var(--gold);
+}
+
+.about-content > p:not(.eyebrow):not(.quote) {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 18px;
+}
+
+.quote {
+    margin-top: 35px;
+    padding-left: 20px;
+    border-left: 3px solid var(--gold);
+
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--gold-light);
+}
+
+/* ==============================
+   CHARACTERS
+================================ */
+
+.characters {
+    background: var(--background);
+}
+
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.character-card {
+    background: var(--surface);
+    overflow: hidden;
+    border: 1px solid rgba(197, 164, 109, 0.12);
+    transition: 0.4s;
+}
+
+.character-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--gold);
+}
+
+.character-image {
+    height: 390px;
+    background-position: center 20%;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-size: contain;
+    transition: transform 0.5s ease;
 }
-#image2{
-    background-image: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.guim.co.uk%2Fimg%2Fmedia%2Fb4671b518cf9f81e4343c5921a6210141fd9f8fa%2F0_92_4284_2570%2Fmaster%2F4284.jpg%3Fwidth%3D1200%26height%3D1200%26quality%3D85%26auto%3Dformat%26fit%3Dcrop%26s%3D75205a6a967abc32d73fc80b7b23b52a&imgrefurl=https%3A%2F%2Fwww.theguardian.com%2Ftv-and-radio%2F2021%2Fmay%2F02%2Fpeaky-blinders-investigated-allegedly-breaking-covid-protocols&tbnid=9x_US4hthdMv6M&vet=12ahUKEwiG8tv-zqjzAhXPCCsKHTIpAuEQMygBegUIARDLAQ..i&docid=yr1DUKLtuhmQGM&w=1200&h=1200&q=peaky%20blinders&ved=2ahUKEwiG8tv-zqjzAhXPCCsKHTIpAuEQMygBegUIARDLAQ");
-width: 300px ;
-height: 300px;
-float: right;
-background-repeat: no-repeat;
-background-size: contain;
+
+.character-card {
+    overflow: hidden;
+}
+
+.character-card:hover .character-image {
+    transform: scale(1.06);
+}
+
+.character-one {
+    background-image: url("https://commons.wikimedia.org/wiki/Special:FilePath/Cillian_Murphy-2014.jpg");
+}
+
+.character-two {
+    background-image: url("https://commons.wikimedia.org/wiki/Special:FilePath/Helen_McCrory_2017_(Extract).jpg");
+}
+
+.character-three {
+    background-image: url("https://commons.wikimedia.org/wiki/Special:FilePath/Annabelle_Wallis_(46047763665)_(cropped).jpg");
+}
+
+.character-four {
+    background-image: url("https://commons.wikimedia.org/wiki/Special:FilePath/Paul_Anderson_2026_(55268093833)_(cropped).jpg");
+}
+
+.character-info {
+    padding: 25px;
+    text-align: center;
+}
+
+.character-info h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.character-info p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin: 8px 0 15px;
+}
+
+.character-info span {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+}
+
+/* ==============================
+   FOOTER
+================================ */
+
+footer {
+    text-align: center;
+    padding: 75px 20px;
+    background: #0b0a09;
+}
+
+footer h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+}
+
+footer > p {
+    color: var(--muted);
+    font-size: 1.2rem;
+    margin-top: 15px;
+}
+
+.footer-line {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 30px auto;
+}
+
+footer .copyright {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+================================ */
+
+@media (max-width: 1000px) {
+
+    .pics,
+    .character-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .about-image {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .section-padding {
+        padding: 75px 6%;
+    }
+
+    .navbar {
+        padding: 0 6%;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-links a {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+    }
+
+    .hero-content {
+        width: 88%;
+    }
+
+    .hero h1 {
+        font-size: 4rem;
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+    }
+
+    .pics,
+    .character-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-card {
+        height: 320px;
+    }
+
+    .character-image {
+        height: 420px;
+    }
+
+    .about-image {
+        min-height: 320px;
+    }
 }
